@@ -76,7 +76,7 @@ register_coco_instances("iSAID_val", {},
 from detectron2.engine import DefaultTrainer
 
 cfg = get_cfg()
-cfg.OUTPUT_DIR = 'output_maskrcnn_imagenet'
+cfg.OUTPUT_DIR = 'output_maskrcnn_coco'
 cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_101_FPN_3x.yaml"))
 cfg.DATASETS.TRAIN = ("iSAID_train",)
 cfg.DATASETS.TEST = ()
