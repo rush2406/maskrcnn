@@ -5,7 +5,7 @@ import multiprocessing as mp
 from collections import deque
 import cv2
 import torch
-
+from detectron2.data.datasets import register_coco_instances
 from detectron2.data import MetadataCatalog
 from detectron2.engine.defaults import DefaultPredictor
 from detectron2.utils.video_visualizer import VideoVisualizer
@@ -21,8 +21,14 @@ class VisualizationDemo(object):
             parallel (bool): whether to run the model in different processes from visualization.
                 Useful since the visualization logic can be slow.
         """
+
+        register_coco_instances("iSAID_test", {},
+                        "/apps/local/shared/CV703/datasets/iSAID/iSAID_patches/test/test_info.json",
+                        "/apps/local/shared/CV703/datasets/iSAID/iSAID_patches/test/images/")
+
+        MetadataCatalog.get("iSAID_test").thing_classes = ["ship","storage_tank","baseball_diamond","tennis_court","basketball_court","Ground_Track_Field","Bridge","Large_Vehicle","Small_Vehicle","Helicopter","Swimming_pool","Roundabout","Soccer_ball_field","plane","Harbor"]
         self.metadata = MetadataCatalog.get(
-            cfg.DATASETS.TEST[0] if len(cfg.DATASETS.TEST) else "__unused"
+            "iSAID_test"
         )
         self.cpu_device = torch.device("cpu")
         self.instance_mode = instance_mode
