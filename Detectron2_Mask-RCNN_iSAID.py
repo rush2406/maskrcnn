@@ -87,7 +87,10 @@ cfg.SOLVER.BASE_LR = 0.00025  # pick a good LR
 cfg.SOLVER.MAX_ITER = 100000#
 cfg.SOLVER.STEPS = []        # do not decay learning rate
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128   # faster (default: 512)
-cfg.MODEL.ROI_HEADS.NUM_CLASSES = 15  
+cfg.MODEL.ROI_HEADS.NUM_CLASSES = 15
+
+##change no of resnet blocks here
+cfg.MODEL.BACKBONE.FREEZE_AT = 2
 
 
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)

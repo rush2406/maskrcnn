@@ -238,6 +238,10 @@ class RPN(nn.Module):
         super().__init__()
         self.in_features = in_features
         self.rpn_head = head
+
+        for param in self.rpn_head.parameters():
+            param.requires_grad=False
+
         self.anchor_generator = anchor_generator
         self.anchor_matcher = anchor_matcher
         self.box2box_transform = box2box_transform
