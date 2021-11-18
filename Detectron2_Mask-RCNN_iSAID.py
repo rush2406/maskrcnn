@@ -81,13 +81,18 @@ cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rc
 cfg.DATASETS.TRAIN = ("iSAID_train",)
 cfg.DATASETS.TEST = ()
 cfg.DATALOADER.NUM_WORKERS = 2
+
+#for imagenet remove this weights line
 #cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_101_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 2
 cfg.SOLVER.BASE_LR = 0.00025  # pick a good LR
 cfg.SOLVER.MAX_ITER = 100000#
 cfg.SOLVER.STEPS = []        # do not decay learning rate
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128   # faster (default: 512)
-cfg.MODEL.ROI_HEADS.NUM_CLASSES = 15  
+cfg.MODEL.ROI_HEADS.NUM_CLASSES = 15
+
+##change no of resnet blocks here
+cfg.MODEL.BACKBONE.FREEZE_AT = 2
 
 
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
